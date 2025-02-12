@@ -17,14 +17,6 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 
 public class Basepage {
-    public By userName =By.xpath("//input[@id='user-name']");
-    public By password = By.xpath("//input[@id='password']");
-    public By loginButton = By.xpath("(//input[@id='login-button'])[1]");
-
-
-
-
-
     public static WebDriver driver;
     public static WebDriverWait wait;
     public static JavascriptExecutor js;
@@ -39,13 +31,6 @@ public class Basepage {
     public void WebdashBasePage() {
 
     }
-    public void loginFunction (ExtentTest methodNode,String name,String pasword ){
-        step(methodNode,"Enter the userName");
-        findTheElement(userName,10).sendKeys(name);
-        findTheElement(password,10).sendKeys(pasword);
-        findTheElement(loginButton,10).click();
-    }
-
 
     public static void setDriver(WebDriver webDriver) {
         driver = webDriver;
