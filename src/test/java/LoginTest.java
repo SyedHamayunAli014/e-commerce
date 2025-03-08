@@ -1,16 +1,15 @@
+
 import com.aventstack.extentreports.ExtentTest;
+import eyesOnTest.Eyes;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-
-
-
 public class LoginTest extends BaseTest {
 
-    @Test(description = "Test Cases for login function")
+    @Test
     public void loginFunction() {
-        ExtentTest test = extentReports.createTest("Login Test");
-        loginPage.loginFun(test, "standard_user", "secret_sauce");
-
+        ExtentTest step = Eyes.getCurrentMethodNode();
+        login.loginFun( step,"111111", "555555");
+        login.loginCorrect( step,"standard_user", "secret_sauce");
     }
 }
