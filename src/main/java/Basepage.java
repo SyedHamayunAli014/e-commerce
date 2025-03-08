@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import com.aventstack.extentreports.ExtentTest;
@@ -28,9 +29,9 @@ public class Basepage {
 
 
 
-    public void WebdashBasePage() {
-
-    }
+//    public void WebdashBasePage() {
+//
+//    }
 
     public static void setDriver(WebDriver webDriver) {
         driver = webDriver;
@@ -52,8 +53,15 @@ public class Basepage {
 
         return word.toString();
     }
+    static String getDriverPath() {
+        // Example 1: Use WebDriverManager to set up and get the path dynamically
+        WebDriverManager.chromedriver().setup();
+        String chromeDriverPath = System.getProperty("webdriver.chrome.driver");
+        System.out.println("ChromeDriver Path: " + chromeDriverPath);
+        return chromeDriverPath;
+    }
 
-    public static String generateRandomColor() {
+        public static String generateRandomColor() {
         // Generate random values for Red, Green, and Blue (each ranging from 0 to 255)
         int red = RANDOM.nextInt(256);
         int green = RANDOM.nextInt(256);

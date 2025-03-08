@@ -2,7 +2,9 @@
 <suite name="Suite">
     <test name="Login Test">
         <classes>
-            <class name="LoginTest"/>
+<!--            <class name="LoginTest"/>-->
+            <class name="HomeTest"/>
+
         </classes>
     </test>
 </suite>

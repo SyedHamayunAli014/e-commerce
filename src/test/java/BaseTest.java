@@ -1,46 +1,46 @@
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 
-import java.time.Duration;
 
 public class BaseTest {
-    protected WebDriver driver;
-    protected ExtentReports extentReports;
+    WebDriver driver;
     public static WebDriverWait wait;
     public static JavascriptExecutor js;
-    public LoginPage loginPage;
+    public LoginPage login;
+    public HomePage homePage;
 
     @BeforeMethod
     public void setUp() {
-        // Extent Reports Setup
-        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("test-output/ExtentReport.html");
-        extentReports = new ExtentReports();
-        extentReports.attachReporter(sparkReporter);
+//        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("test-output/ExtentReport.html");
+//        ExtentReports extentReports = new ExtentReports();
+//        extentReports.attachReporter(sparkReporter);
 
-        // WebDriver Setup
-
-            // WebDriver Setup
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\HP FOLIO\\chrome-win64\\chromedriver.exe");
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.get("https://www.saucedemo.com/");
-
-            // Initialize LoginPage and set the driver
-            loginPage = new LoginPage();
-//            Basepage.setDriver(driver);
+    WebDriverManager.chromedriver().setup();
+    driver = new ChromeDriver();
+    driver.manage().window().maximize();
+    driver.get("https://www.saucedemo.com/");
 
 
 
-        loginPage = new LoginPage();
+        login = new LoginPage(driver);
+        homePage =new HomePage(driver);
         Basepage.setDriver(driver);
+
+        
     }
 
     @AfterMethod
@@ -49,9 +49,6 @@ public class BaseTest {
             driver.quit();
         }
 
-        // Flush Extent Reports
-        if (extentReports != null) {
-            extentReports.flush();
-        }
+
     }
 }
